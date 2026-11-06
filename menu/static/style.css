@@ -1,0 +1,162 @@
+body {
+  background: #28482e;
+  color: #f4f8f6;
+}
+
+.cat-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1030;
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+  white-space: nowrap;
+  background: rgba(40, 72, 46, 0.85);
+  backdrop-filter: blur(6px);
+  scrollbar-width: none;
+}
+
+.cat-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.cat-bar .btn {
+  flex: 0 0 auto;
+}
+
+.collage {
+  box-sizing: border-box;
+  --cols: 3;
+  --cell: 30vw;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), var(--cell));
+  grid-auto-rows: var(--cell);
+  grid-auto-flow: dense;
+  justify-content: center;
+  align-content: center;
+  height: 100svh;
+  overflow: hidden;
+}
+
+.polaroid {
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  transform: rotate(var(--r, 0deg)) scale(1.04);
+}
+
+.polaroid img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.polaroid:nth-child(odd) {
+  --r: -3deg;
+}
+.polaroid:nth-child(even) {
+  --r: 3deg;
+}
+.polaroid:nth-child(3n) {
+  --r: 1.5deg;
+}
+.polaroid:nth-child(5n) {
+  --r: 4deg;
+}
+
+.polaroid.wide {
+  grid-column: span 2;
+}
+.polaroid.tall {
+  grid-row: span 2;
+}
+
+@media (min-width: 768px) {
+  .collage {
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: 20vw;
+  }
+}
+
+.collage-logo {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(20vw, 170px);
+  max-height: 20svh;
+  object-fit: contain;
+  z-index: 5;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.6));
+}
+
+/* Blyrry effect */
+.modal-body a {
+  color: #9fe8ff;
+  text-decoration: underline;
+  word-break: break-all;
+}
+
+.modal-backdrop {
+  --bs-backdrop-bg: #131913;
+  --bs-backdrop-opacity: 0.65;
+}
+
+.modal-backdrop.show {
+  backdrop-filter: blur(1px);
+}
+
+.modal-content {
+  color: #fff;
+  background-color: rgba(42, 46, 42, 0.85);
+  backdrop-filter: blur(1px);
+  border: 1px solid rgba(33, 63, 32, 0.75);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 0 18px rgba(80, 210, 255, 0.2);
+}
+
+.dish {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.dish-description {
+  color: #fff;
+}
+
+.dish:last-child {
+  border-bottom: 0;
+}
+
+.dish img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+body[data-lang="bg"] .lang-en,
+body[data-lang="en"] .lang-bg {
+  display: none !important;
+}
+
+.lang-switch {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 1040;
+}
+
+body[data-lang="bg"]
+  [data-set-lang="bg"]
+  body[data-lang="en"]
+  [data-set-lang="en"] {
+  background: #fff;
+  color: #28482e;
+}
